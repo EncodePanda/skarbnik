@@ -6,7 +6,7 @@ import Data.Semigroup ((<>))
 data Config = Config
   { incomeCsvPath :: String
   , costsCsvPath :: String
-  } deriving Show
+  } deriving (Show,Eq)
 
 configParser :: Parser Config
 configParser = Config
@@ -20,3 +20,6 @@ skarbnik = do
 
   where
     parserInfo = info (configParser <**> helper) fullDesc
+
+createConfig :: String -> String -> Config
+createConfig inc cost = Config {incomeCsvPath = inc, costsCsvPath = cost} 
